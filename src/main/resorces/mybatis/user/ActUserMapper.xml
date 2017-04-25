@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wk.dz.dao.UserMapper">
+	 <resultMap id="userResult" type="com.wk.dz.entity.ActUser">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="name" column="name" jdbcType="VARCHAR" />
+		<result property="phone" column="phone" jdbcType="VARCHAR" />
+		<result property="realName" column="real_name" jdbcType="VARCHAR" />
+		<result property="sex" column="sex" jdbcType="INTEGER" />
+		<result property="tsp" column="tsp" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<select id="getUserByName" resultMap="crmUserResult"
+		parameterType="java.lang.String">
+		select
+		id,name,phone,real_name,sex,tsp
+		from act_user
+		where name = #{name} 
+	</select>
+
+	<select id="getUserById" resultMap="crmUserResult"
+		parameterType="java.lang.Integer">
+		select
+		id,name,phone,real_name,sex,tsp
+		from act_user
+		where id = #{id} 
+	</select>
+	
+	<insert id="insertUser" parameterType="com.wk.dz.entity.ActUser"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into
+		act_user(name,phone,real_name,sex,tsp)
+		values(#{name},#{phone},#{realName},#{sex},#{tsp})
+
+	</insert>
+	
+</mapper>

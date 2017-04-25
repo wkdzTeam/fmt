@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wk.dz.dao.ActContentOptMapper">
+	 <resultMap id="baseResult" type="com.wk.dz.entity.ActContentOpt">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="contentId" column="content_id" jdbcType="INTEGER" />
+		<result property="optInfo" column="opt_info" jdbcType="VARCHAR" />
+		<result property="optType" column="opt_type" jdbcType="INTEGER" />
+		<result property="selected" column="selected" jdbcType="INTEGER" />
+		<result property="tsp" column="tsp" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<select id="getOptInfoByEntity" resultMap="baseResult"
+		parameterType="com.wk.dz.entity.ActContentOpt">
+		select
+		id,content_id,opt_info,opt_type,selected,tsp
+		from act_content_opt
+		<where>
+			<if test="id!=null">
+				id=#{id}
+			</if>
+			<if test="optType!=null">
+				and opt_type=#{optType}
+			</if>
+			<if test="contentId!=null">
+				and content_id=#{contentId}
+			</if>
+		</where>
+	</select>
+	<select id="getOptInfoById" resultMap="baseResult"
+		parameterType="java.lang.Integer">
+		select
+		id,content_id,opt_info,opt_type,selected,tsp
+		from act_content_opt
+		where id=#{id}
+	</select>
+	
+	<select id="getOptInfoByIdList" resultMap="baseResult"
+		parameterType="java.util.List">
+		select
+		id,content_id,opt_info,opt_type,selected,tsp
+		from act_content_opt
+		where id in (0
+		<foreach collection="list" item="item" index="index" >
+				,#{item}
+	    </foreach>
+	    )
+	</select>
+	
+	<insert id="insertOptInfo" parameterType="com.wk.dz.entity.ActContentOpt"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into
+		act_content_opt(content_id,opt_info,opt_type,selected,tsp)
+		values(#{contentId},#{optInfo},#{optType},#{selected},#{tsp})
+
+	</insert>
+	
+</mapper>

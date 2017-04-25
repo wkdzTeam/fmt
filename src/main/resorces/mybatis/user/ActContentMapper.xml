@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wk.dz.dao.ActContentMapper">
+	 <resultMap id="baseResult" type="com.wk.dz.entity.ActContent">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="group" column="group" jdbcType="VARCHAR" />
+		<result property="sex" column="sex" jdbcType="INTEGER" />
+		<result property="info" column="info" jdbcType="VARCHAR" />
+		<result property="isAvaliable" column="is_avaliable" jdbcType="INTEGER" />
+		<result property="tsp" column="tsp" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<select id="getContentById" resultMap="baseResult"
+		parameterType="java.lang.Integer">
+		select
+		id,group,sex,info,is_avaliable,tsp
+		from act_content
+		where id = #{id} 
+	</select>
+	
+	<select id="getContentByIdList" resultMap="baseResult"
+		parameterType="java.util.List">
+		select
+		id,group,sex,info,is_avaliable,tsp
+		from act_content
+		where id in (0
+		<foreach collection="list" item="item" index="index" >
+				,#{item}
+	    </foreach>
+	    )
+	</select>
+	
+	<insert id="insertContent" parameterType="com.wk.dz.entity.ActContent"
+		useGeneratedKeys="true" keyProperty="id" >
+		insert into
+		act_content
+		
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="group != null" >
+	        group,
+	      </if>
+	      <if test="sex != null" >
+	        sex,
+	      </if>
+	      <if test="info != null" >
+	        info,
+	      </if>
+	      <if test="isAvaliable != null" >
+	        is_avaliable,
+	      </if>
+	      <if test="tsp != null" >
+	        tsp
+	      </if>
+	       
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="group != null" >
+	        group,
+	      </if>
+	      <if test="sex != null" >
+	        sex,
+	      </if>
+	      <if test="info != null" >
+	        info,
+	      </if>
+	      <if test="isAvaliable != null" >
+	        isAvaliable,
+	      </if>
+	      <if test="tsp != null" >
+	        tsp
+	      </if>
+	    </trim>
+		
+	</insert>
+	
+	
+	
+</mapper>

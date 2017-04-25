@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html" charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="keywords" content="web,wap,微信,公众号开发,创业团队,激情向上,java,css,js,高效平台,年轻,活力 " />
+		<meta name="description" content="柚行工作室是由一群有梦想，有活力，不满足于生活现状的年轻人创立的，主要致力于开发web网站，微信平台，手机wap站点等项目。团队成员由华为，腾讯等大型企业出身，目标是打造高品质的网络产品。" />
+		<meta   HTTP-EQUIV="Pragma"   CONTENT="no-cache">    
+		<meta   HTTP-EQUIV="Cache-Control"   CONTENT="no-cache">    
+		<meta   HTTP-EQUIV="Expires"   CONTENT="0">
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>五颗豆子</title>
+	</head>
+	<body style="background-color: #030000;">
+		<header>
+			<div class="stock left"></div>
+			<div class="mid"></div>
+			<div class="stock right"></div>
+		</header>
+		<section class="section">
+			 <div class="sec_cont">
+			 	<div class="sec_anima">
+			 		<img src="img/btn_big.png" id="img1"/>
+			 	</div>
+			 	五
+			 </div>
+			 <div class="sec_cont mar_top">
+			 	<div class="sec_anima">
+			 		<img src="img/btn_big.png" id="img2"/>
+			 	</div>
+			 	颗
+			 </div>
+			 <div class="sec_cont mar_top">
+			 	<div class="sec_anima">
+			 		<img src="img/btn_big.png" id="img2"/>
+			 	</div>
+			 	豆
+			 </div>
+			 <div class="sec_cont mar_top">
+			 	<div class="sec_anima">
+			 		<img src="img/btn_big.png" id="img2"/>
+			 	</div>
+			 	子
+			 </div>
+			 <div class="sec_cont mar_top">
+			 	<div class="sec_anima">
+			 		<img src="img/btn_big.png" id="img2"/>
+			 	</div>
+			 	 @2017
+			 </div>
+			 <!--<aside class="imp_name">柚行工作室</aside>-->
+		</section>
+		
+		<section class="lefth">
+			<section class="allmain">
+				<section class="leftmain" id="leftmain">
+					<div class="contDiv sec1">1</div>
+					<div class="contDiv sec2">2</div>
+					<div class="contDiv sec3">3</div>
+					<div class="contDiv sec4">4</div>
+					<div class="contDiv sec5">5</div>
+					<div class="contDiv sec6">6</div>
+				</section>
+			</section>
+			<aside class="hand lefthand"></aside>
+		</section>
+		<section class="righth">
+			<section class="allmain">
+				<section class="rightmain" id="rightmain">
+					<div class="contDiv sec1">6</div>
+					<div class="contDiv sec2">5</div>
+					<div class="contDiv sec3">4</div>
+					<div class="contDiv sec4">3</div>
+					<div class="contDiv sec5">2</div>
+					<div class="contDiv sec6">1</div>
+				</section>
+			</section>
+			<aside class="hand righthand"></aside>
+		</section>
+		<script type="text/javascript" src="js/jquery-1.4.2.min.js" ></script>
+		<script type="text/javascript">
+			var Facaderot = (function(){
+				var $ = function(seletor){
+					return document.querySelector(seletor);
+				}
+				var $$ = function(seletor){
+					return document.querySelectorAll(seletor);
+				};
+				var pri = {
+					"_modDeg":0,
+					"_transForm":["Moz","Ms","Webkit","O",""],
+					"_init":function(selector1,selector2){
+						var _modSize = $$(selector1).length;
+						var _rotateY = 360/_modSize;
+						pri._modDeg = _rotateY/5;
+						var zsize = 100/Math.tan(2*Math.PI/360*(_rotateY/2));
+						for(var i = 1;i <= _modSize; i++){
+							for(var j=0;j<pri._transForm.length;j++){
+								var nn = pri._transForm[j]+"Transform";
+								$(selector2+i).style[nn] = "rotateY("+(i-1)*_rotateY+"deg) translateZ("+(zsize)+"px)";
+							}
+							
+						}
+					},
+					"_anima":function(a,b,c,d){ //a:沿Y轴旋转的父元素；b:舞台元素的子元素（统计个数）；c：舞台元素的子元素（便利查找每个子元素）；d旋转方向
+						pri._init(b,c);
+						var k = 0;
+						setInterval(function(){
+							for(var j=0;j<pri._transForm.length;j++){
+								var nn = pri._transForm[j]+"Transform";
+								$(a).style[nn] = "rotateY("+(d*pri._modDeg*++k)+"deg)";
+							}
+						},1000);
+					}
+				}
+				return {
+					"anima":pri._anima
+				}
+				
+			}());
+			
+			
+			Facaderot.anima('#leftmain',"#leftmain .contDiv","#leftmain .sec",1);
+			Facaderot.anima('#rightmain',"#rightmain .contDiv","#rightmain .sec",-1);
+			$('.sec1').click(function(){
+				alert("( ⊙ o ⊙ )啊！你得手好滑，点的奴家好舒服！")
+			});
+		</script>
+	</body>
+</html>
